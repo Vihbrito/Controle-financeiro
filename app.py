@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for 
 import sqlite3
-from datetime import datetime
+from datetime import datetime, timedelta
 app = Flask(__name__)
 
 
@@ -96,10 +96,12 @@ def index():
 def adicionar_cliente():
     nome_cliente = request.form['nome']
     data_hoje = datetime.now().strftime('%Y-%m-%d')
+    proxima_data_pagamento = (datetime.now() + timedelta(days=14)).strftime('%Y-%m-%d')  # 14 dias a partir de hoje
     
     conexao = conectar_banco()
     cursor = conexao.cursor()
-    cursor.execute("INSERT INTO clientes (nome, data_de_registro) VALUES (?, ?)", (nome_cliente, data_hoje))
+    cursor.execute("INSERT INTO clientes (nome, data_de_registro, proxima_data_pagamento) VALUES (?, ?, ?)", 
+                   (nome_cliente, data_hoje, proxima_data_pagamento))
     conexao.commit()
     conexao.close()
 

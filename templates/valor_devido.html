@@ -34,7 +34,7 @@
                     <p class="vt">VALOR TOTAL: R$ {{ valor_total|round(2) }}</p>
                    
                     <form action="/excluir_valor_devido/{{ cliente_id }}" method="POST" style="display:inline;">
-                        <button type="submit" onclick="return confirm('Tem certeza que deseja excluir o valor devido deste cliente?');">
+                        <button type="submit" onclick="return confirm('Marcar como pago?');">
                             <i class="fa-solid fa-check"></i>
                         </button>
                     </form>
